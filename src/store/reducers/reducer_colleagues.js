@@ -5,6 +5,9 @@ import {
   UPDATE_COLLEAGUES_START,
   UPDATE_COLLEAGUES_ERROR,
   UPDATE_COLLEAGUES_SUCCES,
+  // ADD_COLLEAGUE_START,
+  // ADD_COLLEAGUE_ERROR,
+  // ADD_COLLEAGUE_SUCCES,
   SET_AVAILABLE_COLLEAGUE,
   REMOVE_AVAILABLE_COLLEAGUE,
   SET_PICKED_COLLEAGUES,
@@ -40,21 +43,6 @@ export default function (state = initialState, action) {
         error: false,
         colleagues: action.payload,
       };
-    case SET_AVAILABLE_COLLEAGUE:
-      return {
-        ...state,
-        available: [...state.available, action.payload],
-      };
-    case REMOVE_AVAILABLE_COLLEAGUE:
-      return {
-        ...state,
-        available: state.available.filter(person => person !== action.payload),
-      };
-    case SET_PICKED_COLLEAGUES:
-      return {
-        ...state,
-        picked: action.payload,
-      };
     case UPDATE_COLLEAGUES_START:
       return {
         ...state,
@@ -72,8 +60,23 @@ export default function (state = initialState, action) {
         ...state,
         updating: false,
         error: false,
+        colleagues: action.payload.data,
       };
-
+    case SET_AVAILABLE_COLLEAGUE:
+      return {
+        ...state,
+        available: [...state.available, action.payload],
+      };
+    case REMOVE_AVAILABLE_COLLEAGUE:
+      return {
+        ...state,
+        available: state.available.filter(person => person !== action.payload),
+      };
+    case SET_PICKED_COLLEAGUES:
+      return {
+        ...state,
+        picked: action.payload,
+      };
     default:
       return state;
   }

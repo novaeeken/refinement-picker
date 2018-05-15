@@ -13,8 +13,31 @@ export default {
 };
 
 export const globalCss = () => injectGlobal`
+  html {
+    font-size: 16px;
+  }
+
   body {
-    padding: 0px;
-    margin: 0px;
+    padding: 0rem;
+    margin: 0rem;
+    font-family: Helvetica, Arial, sans-serif;
+  }
+
+  h1 {
+
+  }
+
+  h2 {
+    
+    font-weight: 200;
+    font-size: 1.5rem;
+  }
+
+  button {
+    font-size: 1.4em;
+    padding: 0.5em 1em;
+    border: 0px;
+    border-radius: 10px;
+    width: 100%;
   }
 `;

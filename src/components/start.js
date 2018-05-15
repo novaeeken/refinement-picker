@@ -1,41 +1,32 @@
 import React, { Component } from 'react';
-import styled, { ThemeProvider } from 'styled-components';
-import NameCandidates from './name-candidates';
-import NamePicker from './name-picker';
-import NameShower from './name-shower';
+import { Route, Switch } from 'react-router-dom';
+import { ThemeProvider } from 'styled-components';
+import PrivateRoute from './privateRoute/privateRoute';
+import NameCandidates from './picker-page/name-candidates';
+import RefinementResults from './picker-page/refinement-results';
+import Settings from './settings-page/settings';
+import Balance from './balance-page/balance';
+import History from './history-page/history';
+import Login from './settings-page/login';
+import PageTemplate from './template/page-template';
 import theme, { globalCss } from '../theme';
 
-const Container = styled.div`
-  background-color: #1A212E;
-  display: flex;
-  /* LET OP */
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  color: #f8f9fc;
-  height: 100vh;
-  font-family: Helvetica, Arial, sans-serif;
-  font-weight: 100;
-  font-size: 1em;
-`;
-
 class App extends Component {
-  state = { view: 'NameCandidates' };
-
-  setView = (component) => {
-    this.setState({ view: component });
-  }
-
   render() {
-    const { view } = this.state;
     globalCss();
     return (
       <ThemeProvider theme={theme}>
-        <Container>
-          { view === 'NameCandidates' && <NameCandidates toNextStep={this.setView} /> }
-          { view === 'NamePicker' && <NamePicker toNextStep={this.setView} /> }
-          { view === 'NamePicker' && <NameShower /> }
-        </Container>
+        <PageTemplate>
+          <Switch>
+            <PrivateRoute path="/settings" component={Settings} />
+            <Route path="/settings" component={Settings} />
+            <Route path="/results" component={RefinementResults} />
+            <Route path="/balance" component={Balance} />
+            <Route path="/history" component={History} />
+            <Route path="/login" component={Login} />
+            <Route path="/" component={NameCandidates} />
+          </Switch>
+        </PageTemplate>
       </ThemeProvider>
     );
   }

@@ -3,9 +3,6 @@ const countToWeight = (namesObj) => {
   const count = namesObj.map(element => element.count);
   const total_count = count.reduce((total, num) => total + num, 0);
 
-  // calculate sample size
-  const n = namesObj.length - 1;
-
   for (let i = 0; i < namesObj.length; i++) {
     const originalWeight = namesObj[i].count / total_count;
     // replace the counts with distributed weights for every entry
@@ -15,9 +12,9 @@ const countToWeight = (namesObj) => {
 };
 
 const getRandomName = (list, weight) => {
-  const rand = (min, max) => Math.random() * (max - min) + min;
-
-  const random_num = rand(0, list.length - 1);
+  const rand = (min, max) => (Math.random() * (max - min)) + min;
+  const sampleSize = list.length - 1;
+  const random_num = rand(0, sampleSize);
 
   let weight_sum = 0;
 
@@ -79,9 +76,12 @@ export const pickTwoNames = (originalBase, candidates) => {
 
   const name2 = ConvertSplitPick(duplicateBase2);
 
-  // // 6. UPDATE COUNT OF ORIGINAL LIST
+  // 6. UPDATE COUNT OF ORIGINAL LIST
   updateCount(name1, originalBase);
   updateCount(name2, originalBase);
+
+  // 7. PUSH THE NAMES INTO HISTORY DB
+
 
   // Return the names and the updated list
   return [
@@ -94,3 +94,5 @@ export const pickTwoNames = (originalBase, candidates) => {
     },
   ];
 };
+
+export default null;
