@@ -37,10 +37,6 @@ class NameCandidates extends Component {
       const outcome = pickTwoNames(colleagues, candidates);
       // 2.set result(two names) and updated-count-object in store
       this.props.setPickedColleagues(outcome);
-      // 3. update the current count with the updated-count-object
-      this.props.updateColleagues(outcome[1].updatedBase);
-      // 4. write to database as history
-      this.props.updateHistory(outcome[0]);
       this.props.history.push('/results');
     }
   }

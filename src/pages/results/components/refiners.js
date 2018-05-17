@@ -1,4 +1,6 @@
 import React, { Component, Fragment } from 'react';
+import { Redirect } from 'react-router';
+// import createBrowserHistory from 'history/createBrowserHistory';
 import { connect } from 'react-redux';
 import styled, { keyframes } from 'styled-components';
 
@@ -58,6 +60,10 @@ const Name2 = Title.extend`
 
 class Refiners extends Component {
   render() {
+    // if page is refreshed and no names have been picked, redirect to home
+    if (!this.props.picked.length) {
+      return <Redirect to="/" />;
+    }
     return (
       <ShowWrapper>
         <Title>

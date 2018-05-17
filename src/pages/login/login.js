@@ -33,7 +33,7 @@ class Login extends Component {
 
     return (
       <Card>
-        Hiervoor moet je ingelogt zijn.
+        <h4>Deze functionaliteit is afgeschermd</h4>
         <Form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
           <Field
             name="loginCode"

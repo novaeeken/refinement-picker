@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import { Bar } from 'react-chartjs-2';
-import { Card } from '../../components';
+import { Card, Button } from '../../components';
 
 import { fetchColleagues } from '../../store/actions/colleagues';
 
@@ -35,6 +35,9 @@ class Balance extends Component {
       <Fragment>
         <Card width="80%" align="center">
           <h2> Hallo dit is een titel super leuk sexy yolo </h2>
+          <Button>
+            Reset Balance to 0
+          </Button>
         </Card>
         <Card width="80%">
           <Bar

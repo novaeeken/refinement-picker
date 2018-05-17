@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
 import { fetchHistory } from '../../store/actions/history';
-import { Card } from '../../components';
+import { Card, Button } from '../../components';
 import { TableRow } from './components';
 
 const Table = styled.table`
@@ -59,6 +59,9 @@ class History extends Component {
           </tr>
           {items}
         </Table>
+        <Button>
+          Clear history
+        </Button>
       </TableWrapper>
     );
   }
