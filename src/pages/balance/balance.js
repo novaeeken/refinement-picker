@@ -13,11 +13,12 @@ class Balance extends Component {
   render() {
     const names = this.props.colleagues.map(element => element.name);
     const counts = this.props.colleagues.map(element => element.count);
+    console.log(counts);
 
     const data = {
       labels: names,
       datasets: [{
-        label: null,
+        label: 'aantal keer gekozen',
         backgroundColor: '#fea00e',
         borderColor: '#fea00e',
         data: counts,
@@ -34,10 +35,10 @@ class Balance extends Component {
     return (
       <Fragment>
         <Card width="80%" align="center">
-          <h2> Hallo dit is een titel super leuk sexy yolo </h2>
-          <Button>
+          <h2> Refiners balans </h2>
+          {/* <Button>
             Reset Balance to 0
-          </Button>
+          </Button> */}
         </Card>
         <Card width="80%">
           <Bar

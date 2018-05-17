@@ -1,9 +1,11 @@
 import Checkbox from './checkbox';
-import Input from './input';
+import Input from './inputField';
+import PasswordField from './passwordField';
 
 export {
   Checkbox,
   Input,
+  PasswordField,
 };
 
 export default null;

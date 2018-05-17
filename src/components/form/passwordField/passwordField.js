@@ -11,24 +11,13 @@ const Input = styled.input`
   padding: 0 .5rem;
   font-size: 1rem;
 
-  &:disabled {
-    border: none;
-    padding-top: 0.25rem;
-    background-color: ${props => props.theme.blueMedium};
-    color: ${props => props.theme.textWhite};
-    font-size: 1.25rem;
-    font-weight: bold;
-  }
 `;
 
 export default field => (
   <Fragment>
     <Input
-      type="text"
-      placeholder={field.placeholder}
+      type="password"
       {...field.input}
-      disabled={field.disabled}
-      autocomplete="off"
     />
     {/* <div className="text-help">
       {touched ? error : ''}

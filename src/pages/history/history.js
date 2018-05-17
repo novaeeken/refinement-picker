@@ -53,15 +53,19 @@ class History extends Component {
     return (
       <TableWrapper width="80%" >
         <Table>
-          <tr>
-            <th>Date</th>
-            <th>Refiners</th>
-          </tr>
-          {items}
+          <thead>
+            <tr>
+              <th>Date</th>
+              <th>Refiners</th>
+            </tr>
+          </thead>
+          <tbody>
+            {items}
+          </tbody>
         </Table>
-        <Button>
+        {/* <Button>
           Clear history
-        </Button>
+        </Button> */}
       </TableWrapper>
     );
   }

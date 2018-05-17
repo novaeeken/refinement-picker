@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react';
 import styled from 'styled-components';
 
-const Input = styled.input`
+const PasswordField = styled.input`
   display: inline;
   height: 2.5rem;
   border-radius: 0.25rem;
@@ -23,16 +23,11 @@ const Input = styled.input`
 
 export default field => (
   <Fragment>
-    <Input
-      type="text"
-      placeholder={field.placeholder}
+    <PasswordField
+      type="input"
       {...field.input}
       disabled={field.disabled}
-      autocomplete="off"
+      placeholder={field.placeholder}
     />
-    {/* <div className="text-help">
-      {touched ? error : ''}
-    </div> */}
   </Fragment>
 );
-

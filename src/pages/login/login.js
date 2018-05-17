@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
 import styled from 'styled-components';
 import { Card, Button } from '../../components';
-import { Input } from '../../components/form';
+import { PasswordField } from '../../components/form';
 import { authenticate } from '../../store/actions/types';
 
 const Form = styled.form`
@@ -37,7 +37,7 @@ class Login extends Component {
         <Form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
           <Field
             name="loginCode"
-            component={Input}
+            component={PasswordField}
             value={this.state.term}
             onChange={event => this.onInputChange(event.target.value)}
           />
