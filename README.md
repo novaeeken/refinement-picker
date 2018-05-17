@@ -13,7 +13,7 @@ I'm a beginning front-end developer. Everyday I make sure two of my colleagues (
 ## Libraries & Technologies
 - React
 - HTML5
-- CSS3 Animations 
+- CSS3 Animations
 - JavaScript
 - Styled Components
 

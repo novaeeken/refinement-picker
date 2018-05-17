@@ -1,3 +1,6 @@
+require('dotenv').config();
+const webpack = require('webpack');
+
 module.exports = {
   entry: [
     './src/index.js',
@@ -22,4 +25,9 @@ module.exports = {
       },
     ],
   },
+  plugins: [
+    new webpack.DefinePlugin({
+      'process.env.FIREBASE_URL': JSON.stringify(process.env.FIREBASE_URL),
+    }),
+  ],
 };

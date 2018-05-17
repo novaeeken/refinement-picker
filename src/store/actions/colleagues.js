@@ -30,12 +30,11 @@ const fetchColleaguesSucces = payload => ({
 });
 
 export const fetchColleagues = () => (dispatch, getState) => {
-  // get the current state
   const state = getState();
 
   if (state.colleagues.colleagues.length === 0) {
     dispatch(fetchColleaguesStart());
-    axios.get('https://refinementpicker.firebaseio.com/collegas.json')
+    axios.get(process.env.FIREBASE_URL)
       .then((response) => {
         dispatch(fetchColleaguesSucces(response.data));
       })
@@ -61,7 +60,7 @@ const updateColleaguesSucces = payload => ({
 export const updateColleagues = updatedbase => (dispatch) => {
   dispatch(updateColleaguesStart());
 
-  axios.put('https://refinementpicker.firebaseio.com/collegas.json', updatedbase)
+  axios.put(process.env.FIREBASE_URL, updatedbase)
     .then((response) => {
       dispatch(updateColleaguesSucces(response));
     })

@@ -1,3 +1,6 @@
+require('dotenv').config();
+const webpack = require('webpack');
+
 module.exports = {
   entry: [
     './src/index.js',
@@ -25,4 +28,9 @@ module.exports = {
     port: process.env.PORT || 8080,
     host: '0.0.0.0',
   },
+  plugins: [
+    new webpack.DefinePlugin({
+      'process.env.FIREBASE_URL': JSON.stringify(process.env.FIREBASE_URL),
+    }),
+  ],
 };
