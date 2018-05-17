@@ -2,6 +2,9 @@ module.exports = {
   entry: [
     './src/index.js',
   ],
+  optimization: {
+    minimize: true,
+  },
   output: {
     path: __dirname,
     publicPath: '/',
