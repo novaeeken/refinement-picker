@@ -6,7 +6,9 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "webpack-dev-server",
-    "lint:js": "eslint ./src"
+    "lint:js": "eslint ./src",
+    "build": "webpack --config webpack.production.config.js",
+    "postinstall": "npm run build"
   },
   "author": "Nova Eeken",
   "license": "ISC",
@@ -24,6 +26,7 @@
     "redux": "^4.0.0",
     "redux-form": "^7.3.0",
     "redux-thunk": "^2.2.0",
+    "serve": "^6.5.7",
     "styled-components": "^3.2.6",
     "uuid": "^3.2.1",
     "webpack": "^4.6.0",
