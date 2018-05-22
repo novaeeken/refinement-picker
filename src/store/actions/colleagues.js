@@ -15,6 +15,8 @@ export const SET_AVAILABLE_COLLEAGUE = 'set_available_colleague';
 export const REMOVE_AVAILABLE_COLLEAGUE = 'remove_available_colleague';
 export const SET_PICKED_COLLEAGUES = 'set_picked_colleagues';
 
+// remember initial name in form field
+export const SET_ORIGINAL_COLLEAGUE = 'set_original_colleague';
 
 const fetchColleaguesStart = () => ({
   type: FETCH_COLLEAGUES_START,
@@ -69,11 +71,11 @@ export const updateColleagues = updatedbase => (dispatch) => {
     });
 };
 
-export const editColleague = (original, newName) => (dispatch, getState) => {
+export const editColleague = newName => (dispatch, getState) => {
   const state = getState();
   const colleagues = state.colleagues.colleagues;
   const index = colleagues.findIndex(element =>
-    element.name.toLowerCase() === original.toLowerCase(),
+    element.name.toLowerCase() === state.colleagues.originalName.toLowerCase(),
   );
   colleagues[index].name = newName;
   dispatch(updateColleagues(colleagues));
@@ -121,6 +123,11 @@ export const removeAvailableColleague = payload => ({
 
 export const setPickedColleagues = payload => ({
   type: SET_PICKED_COLLEAGUES,
+  payload,
+});
+
+export const setOriginalColleague = payload => ({
+  type: SET_ORIGINAL_COLLEAGUE,
   payload,
 });
 

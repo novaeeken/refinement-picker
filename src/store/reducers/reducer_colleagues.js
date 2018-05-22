@@ -5,18 +5,17 @@ import {
   UPDATE_COLLEAGUES_START,
   UPDATE_COLLEAGUES_ERROR,
   UPDATE_COLLEAGUES_SUCCES,
-  // ADD_COLLEAGUE_START,
-  // ADD_COLLEAGUE_ERROR,
-  // ADD_COLLEAGUE_SUCCES,
   SET_AVAILABLE_COLLEAGUE,
   REMOVE_AVAILABLE_COLLEAGUE,
   SET_PICKED_COLLEAGUES,
+  SET_ORIGINAL_COLLEAGUE,
 } from '../actions/colleagues';
 
 const initialState = {
   fetching: false,
   updating: false,
   error: false,
+  originalName: '',
   colleagues: [],
   available: [],
   picked: [],
@@ -76,6 +75,11 @@ export default function (state = initialState, action) {
       return {
         ...state,
         picked: action.payload,
+      };
+    case SET_ORIGINAL_COLLEAGUE:
+      return {
+        ...state,
+        originalName: action.payload,
       };
     default:
       return state;

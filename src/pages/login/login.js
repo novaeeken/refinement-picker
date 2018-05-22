@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Field, reduxForm } from 'redux-form';
+import { Field, reduxForm, SubmissionError } from 'redux-form';
 import styled from 'styled-components';
+import { requiredValidator } from '../../helpers/formValidators';
 import { Card, Button } from '../../components';
 import { PasswordField } from '../../components/form';
 import { authenticate } from '../../store/actions/types';
@@ -9,6 +10,8 @@ import { authenticate } from '../../store/actions/types';
 const Form = styled.form`
   margin: 20px 0 10px 0;
 `;
+
+const required = requiredValidator('Please enter a password');
 
 class Login extends Component {
   state = {
@@ -20,7 +23,10 @@ class Login extends Component {
       this.props.authenticate(true);
       this.props.history.push('/settings');
     } else {
-      // error
+      throw new SubmissionError({
+        loginCode: 'Wachtwoord is onjuist',
+        _error: 'Wrong password',
+      });
     }
   }
 
@@ -40,6 +46,7 @@ class Login extends Component {
             component={PasswordField}
             value={this.state.term}
             onChange={event => this.onInputChange(event.target.value)}
+            validate={required}
           />
           <Button
             type="submit"

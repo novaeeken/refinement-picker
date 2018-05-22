@@ -13,7 +13,6 @@ class Balance extends Component {
   render() {
     const names = this.props.colleagues.map(element => element.name);
     const counts = this.props.colleagues.map(element => element.count);
-    console.log(counts);
 
     const data = {
       labels: names,

@@ -4,9 +4,11 @@ import { Field, reduxForm } from 'redux-form';
 import styled from 'styled-components';
 import FaEdit from 'react-icons/lib/fa/edit';
 import FaRemove from 'react-icons/lib/fa/times-circle';
+import { requiredValidator, minLengthValidator } from '../../../helpers/formValidators';
 import {
   deleteColleague,
   editColleague,
+  setOriginalColleague,
 } from '../../../store/actions/colleagues';
 import { Input } from '../../../components/form';
 import { Button } from '../../../components';
@@ -22,17 +24,20 @@ const Option = styled.p`
   }
 `;
 
+const required = requiredValidator('Please enter a name');
+const minLength = minLengthValidator('Name must be at least 3 characters long');
+
 class EditForm extends Component {
   state = {
     term: '',
-    originalName: '',
     editing: false,
     removing: false,
   }
 
   onEditClick = (initialName) => {
     // hide edit button and save the initial value
-    this.setState({ editing: true, originalName: initialName });
+    this.props.setOriginalColleague(initialName);
+    this.setState({ editing: true });
   }
 
   onRemoveClick = (name) => {
@@ -47,7 +52,13 @@ class EditForm extends Component {
 
   onSubmit = (value) => {
     // passing on the original and edited input
-    this.props.editColleague(this.state.originalName, value.editColleague);
+    this.props.editColleague(value.editColleague);
+    this.setState({ editing: false });
+  }
+
+  onCancel = () => {
+    // reset the field to it's initial value
+    this.props.reset();
     this.setState({ editing: false });
   }
 
@@ -63,6 +74,7 @@ class EditForm extends Component {
           value={this.state.term}
           onChange={event => this.onInputChange(event.target.value)}
           disabled={!this.state.editing}
+          validate={[required, minLength]}
         />
 
         {/* edit and delete options  */}
@@ -86,7 +98,7 @@ class EditForm extends Component {
               margin="0 0.5rem 0 0"
             >Save</Button>
             <Button
-              onClick={() => this.setState({ editing: false })}
+              onClick={() => this.onCancel()}
               fontSize="1rem"
               background="blueLight"
               color="black"
@@ -98,13 +110,19 @@ class EditForm extends Component {
   }
 }
 
+const mapStateToProps = state => ({
+  originalName: state.colleagues.originalName,
+});
+
 const mapDispatchToProps = dispatch => ({
   deleteColleague: name => dispatch(deleteColleague(name)),
   editColleague: (original, edit) => dispatch(editColleague(original, edit)),
+  setOriginalColleague: name => dispatch(setOriginalColleague(name)),
 });
 
 export default id => reduxForm({
   form: id,
+  enableReinitialize: true,
 })(
-  connect(null, mapDispatchToProps)(EditForm),
+  connect(mapStateToProps, mapDispatchToProps)(EditForm),
 );
