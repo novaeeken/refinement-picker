@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 import { reduxForm } from 'redux-form';
 import styled from 'styled-components';
 import FaCheck from 'react-icons/lib/fa/check';
@@ -10,7 +11,6 @@ import {
   setPickedColleagues,
 } from '../../../store/actions/colleagues';
 import { updateHistory } from '../../../store/actions/history';
-import { pickTwoNames } from '../../../helpers/namepicker';
 
 const CompleteIcon = styled(FaCheck)`
   padding: 0 10px 0 0;
@@ -39,10 +39,7 @@ class NameAcceptor extends Component {
   }
 
   onCancelClick = () => {
-    const { candidates, colleagues } = this.props;
-    const outcome = pickTwoNames(colleagues, candidates);
-    this.props.setPickedColleagues(outcome);
-    this.setState({ accepted: false });
+    this.props.history.push('/');
   }
 
   render() {
@@ -89,6 +86,6 @@ const mapDispatchToProps = dispatch => ({
 export default reduxForm({
   form: 'acceptor',
 })(
-  connect(mapStateToProps, mapDispatchToProps)(NameAcceptor),
+  connect(mapStateToProps, mapDispatchToProps)(withRouter(NameAcceptor)),
 );
 
