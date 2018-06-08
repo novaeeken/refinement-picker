@@ -9,6 +9,7 @@ import { Card, Button } from '../../../components';
 import {
   updateColleagues,
   setPickedColleagues,
+  resetRefinementpicker,
 } from '../../../store/actions/colleagues';
 import { updateHistory } from '../../../store/actions/history';
 
@@ -39,6 +40,7 @@ class NameAcceptor extends Component {
   }
 
   onCancelClick = () => {
+    this.props.resetRefinementpicker();
     this.props.history.push('/');
   }
 
@@ -81,6 +83,7 @@ const mapDispatchToProps = dispatch => ({
   updateColleagues: updatedList => dispatch(updateColleagues(updatedList)),
   updateHistory: pickedNames => dispatch(updateHistory(pickedNames)),
   setPickedColleagues: names => dispatch(setPickedColleagues(names)),
+  resetRefinementpicker: () => dispatch(resetRefinementpicker()),
 });
 
 export default reduxForm({

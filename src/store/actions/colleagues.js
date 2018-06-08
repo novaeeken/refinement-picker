@@ -15,6 +15,9 @@ export const SET_AVAILABLE_COLLEAGUE = 'set_available_colleague';
 export const REMOVE_AVAILABLE_COLLEAGUE = 'remove_available_colleague';
 export const SET_PICKED_COLLEAGUES = 'set_picked_colleagues';
 
+// reset the whole thing
+export const RESET_REFINEMENTPICKER = 'reset_refinementpicker';
+
 // remember initial name in form field
 export const SET_ORIGINAL_COLLEAGUE = 'set_original_colleague';
 
@@ -118,6 +121,11 @@ export const setAvailableColleague = payload => ({
 
 export const removeAvailableColleague = payload => ({
   type: REMOVE_AVAILABLE_COLLEAGUE,
+  payload,
+});
+
+export const resetRefinementpicker = payload => ({
+  type: RESET_REFINEMENTPICKER,
   payload,
 });
 

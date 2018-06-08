@@ -32,7 +32,7 @@ class NameCandidates extends Component {
 
   onSubmit = () => {
     const { colleagues, candidates } = this.props;
-    if (colleagues.length > 0 && candidates.length > 2) {
+    if (colleagues.length > 1) {
       // 1. pick two names based on current count data and candidates
       const outcome = pickTwoNames(colleagues, candidates);
       // 2.set result(two names) and updated-count-object in store

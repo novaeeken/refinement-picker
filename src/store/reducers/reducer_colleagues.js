@@ -7,6 +7,7 @@ import {
   UPDATE_COLLEAGUES_SUCCES,
   SET_AVAILABLE_COLLEAGUE,
   REMOVE_AVAILABLE_COLLEAGUE,
+  RESET_REFINEMENTPICKER,
   SET_PICKED_COLLEAGUES,
   SET_ORIGINAL_COLLEAGUE,
 } from '../actions/colleagues';
@@ -80,6 +81,12 @@ export default function (state = initialState, action) {
       return {
         ...state,
         originalName: action.payload,
+      };
+    case RESET_REFINEMENTPICKER:
+      return {
+        ...state,
+        available: [],
+        picked: [],
       };
     default:
       return state;

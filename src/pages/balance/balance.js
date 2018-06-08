@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import { Bar } from 'react-chartjs-2';
-import { Card, Button } from '../../components';
+import { Card } from '../../components';
 
 import { fetchColleagues } from '../../store/actions/colleagues';
 
@@ -25,6 +25,16 @@ class Balance extends Component {
       }],
     };
 
+    const options = {
+      scales: {
+        yAxes: [{
+          ticks: {
+            beginAtZero: true,
+          },
+        }],
+      },
+    };
+
     if (!names.length) {
       return (
         <Card> Loading.. </Card>
@@ -35,14 +45,12 @@ class Balance extends Component {
       <Fragment>
         <Card width="80%" align="center">
           <h2> Refiners balans </h2>
-          {/* <Button>
-            Reset Balance to 0
-          </Button> */}
         </Card>
         <Card width="80%">
           <Bar
             data={data}
             height={100}
+            options={options}
           />
         </Card>
       </Fragment>
