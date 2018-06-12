@@ -3,11 +3,14 @@ const countToWeight = (namesObj) => {
   const count = namesObj.map(element => element.count);
   const total_count = count.reduce((total, num) => total + num, 0);
 
-  for (let i = 0; i < namesObj.length; i++) {
-    const originalWeight = namesObj[i].count / total_count;
-    // replace the counts with distributed weights for every entry
-    namesObj[i].count = (1 - originalWeight);
+  if (total_count !== 0) {
+    for (let i = 0; i < namesObj.length; i += 1) {
+      const originalWeight = namesObj[i].count / total_count;
+      // replace the counts with distributed weights for every entry
+      namesObj[i].count = (1 - originalWeight);
+    }
   }
+
   return namesObj;
 };
 
@@ -15,11 +18,17 @@ const getRandomName = (list, weight) => {
   const rand = (min, max) => (Math.random() * (max - min)) + min;
   const sampleSize = list.length - 1;
   const random_num = rand(0, sampleSize);
+  const checkIfZero = weight.reduce((total, num) => total + num);
 
   let weight_sum = 0;
 
+  // if all candidates weights are 0, just pick a random person
+  if (checkIfZero === 0) {
+    return list[Math.floor(random_num)];
+  }
+
   // entries with larger weights have a greater chance of random number < entry, thus being chosen.
-  for (let i = 0; i < list.length; i++) {
+  for (let i = 0; i < list.length; i += 1) {
     weight_sum += weight[i];
 
     if (random_num <= weight_sum) {
@@ -31,6 +40,7 @@ const getRandomName = (list, weight) => {
 const updateCount = (name, base) => {
   // find indexposition and up the count with 1
   const position = base.findIndex(element => element.name === name);
+  // console.log(base, position, name);
   base[position].count += 1;
 };
 
@@ -47,7 +57,6 @@ const ConvertSplitPick = (base) => {
 export const pickTwoNames = (originalBase, candidates) => {
   // 1. CLONE ORIGINAL LIST WITHOUT REFERENCE AND SORT NAMES BASED ON COUNT low - high
   let duplicateBase1 = JSON.parse(JSON.stringify(originalBase));
-
   duplicateBase1.sort((a, b) => {
     if (a.count > b.count) {
       return 1;
@@ -55,7 +64,6 @@ export const pickTwoNames = (originalBase, candidates) => {
     if (a.count < b.count) {
       return -1;
     }
-
     return 0;
   });
 
